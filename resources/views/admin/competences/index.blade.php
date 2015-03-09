@@ -1,0 +1,1 @@
+je suis la page d'administration des compétences
