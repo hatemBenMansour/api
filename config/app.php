@@ -139,6 +139,7 @@ return [
          * service provider plugin
          */
         'Laracasts\Generators\GeneratorsServiceProvider',
+        'Barryvdh\Cors\CorsServiceProvider',
 
 
 

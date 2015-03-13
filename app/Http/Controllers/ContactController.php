@@ -23,7 +23,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        if ((Request::wantsJson() || Request::isJson())) {
+            $result['results'] = [array('_token' => csrf_token())];
+            return Response::json($result);
+        }
     }
 
     /**
@@ -43,6 +46,7 @@ class ContactController extends Controller
      */
     public function store()
     {
+
         $validator = Validator::make(Input::all(), $this->rules);
         if ($validator->fails()) {
             if (Request::isJson()) {
@@ -58,19 +62,20 @@ class ContactController extends Controller
             'content' => $content
         );
         $subject = "Nouveau E-mail de contact via le Portfolio";
-        $to = 'contact@benmansourhatem.com';
+        $to = 'ben_mansour_hatem@yahoo.fr';
 
         $send = Mail::send('emails.contact', $data, function ($message) use ($to, $subject, $email, $name) {
             $message->from($email, $name);
             $message->to($to)->subject($subject);
         });
 
+
         if (Request::isJson()) {
             if ($send) {
-                $result['data'] = array('status' => 'success','message' => 'Votre message est envoyé avec succès');
+                $result['data'] = array('status' => 'success', 'message' => 'Votre message est envoyé avec succès');
                 return Response::json($result);
             } else {
-                $result['data'] = array('status' => 'errors','message' => 'Erreur d\'envoi, merci de réessayer');
+                $result['data'] = array('status' => 'errors', 'message' => 'Erreur d\'envoi, merci de réessayer');
                 return Response::json($result, 400);
             }
 

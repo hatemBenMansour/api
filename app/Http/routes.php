@@ -26,7 +26,7 @@ Route::group(array('prefix' => 'api'), function () {
     Route::resource('menus', 'MenuController', array('only' => array('index', 'show')));
     Route::resource('competences', 'CompetenceController', array('only' => array('index')));
     Route::resource('socials', 'SocialController', array('only' => array('index')));
-    Route::resource('contact', 'ContactController', array('only' => array('store')));
+    Route::resource('contact', 'ContactController', array('only' => array('index','store')));
 });
 /*
  * Route for administration

@@ -9,6 +9,8 @@ class AdminController extends Controller
 
     public function __construct()
     {
+      //  dd('aaa'.env('DB_HOST').env('DB_DATABASE'));
+
         $this->middleware('auth');
     }
 
@@ -20,7 +22,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        dd(Session::get('_token'));
+
        return View::make('admin.index');
     }
 
